@@ -1,6 +1,8 @@
-﻿// Задача 1: Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая покажет количество чётных чисел в массиве.
+﻿// Задача 2: Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных индексах.
 
-// [345, 897, 568, 234] -> 2
+// [3, 7, 23, 12] -> 19
+
+// [-4, -6, 89, 6] -> 0
 
 int SizeArray()
 {
@@ -19,27 +21,31 @@ int SizeArray()
 int[] FillArray(int Size)
 {
     int[] arr = new int[Size];
+    System.Console.Write("Введите левую границу массива: ");
+    int MinValue = int.Parse(Console.ReadLine()!);
+    System.Console.Write("Введите правую границу массива: ");
+    int MaxValue = int.Parse(Console.ReadLine()!);
     for (int i = 0; i < Size; i++)
     {
-        arr[i] = new Random().Next(100, 1000);
+        arr[i] = new Random().Next(MinValue, MaxValue);
     }
     System.Console.WriteLine($"[{String.Join(", ", arr)}]");
     return arr;
 }
 
-int CheckElementArray(int[] arr)
+int SumElementArray(int[] arr)
 {
-    int count = 0;
-    foreach (int el in arr)
+    int sum = 0;
+    for (int i = 1; i < arr.Length; i += 2)
     {
-        if (el % 2 == 0) count++;
+        sum += arr[i];
     }
-    return count;
+    return sum;
 }
 
 int Size = SizeArray();
 
 int[] Array = FillArray(Size);
 
-System.Console.WriteLine($"В массиве находится {CheckElementArray(Array)} четных чисел");
+System.Console.WriteLine($"Сумма элементов массива, стоящих на нечетных индексах, равна: {SumElementArray(Array)}");
 
