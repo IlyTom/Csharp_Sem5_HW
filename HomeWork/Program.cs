@@ -1,6 +1,5 @@
-﻿// Задача 1: Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая покажет количество чётных чисел в массиве.
-
-// [345, 897, 568, 234] -> 2
+﻿// Задача 3: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.
+// [3, 7.4, 22.3, 2, 78] -> 76
 
 int SizeArray()
 {
@@ -16,30 +15,28 @@ int SizeArray()
 }
 
 
-int[] FillArray(int Size)
+double[] FillArray(int Size)
 {
-    int[] arr = new int[Size];
+    double[] arr = new double[Size];
     for (int i = 0; i < Size; i++)
     {
-        arr[i] = new Random().Next(100, 1000);
+        arr[i] = Math.Round(new Random().NextDouble()*100,1);
     }
-    System.Console.WriteLine($"[{String.Join(", ", arr)}]");
+    System.Console.WriteLine($"[{String.Join(" | ", arr)}]");
     return arr;
 }
 
-int CheckElementArray(int[] arr)
+double MinMaxDifference(double[] arr)
 {
-    int count = 0;
-    foreach (int el in arr)
-    {
-        if (el % 2 == 0) count++;
-    }
-    return count;
+    double Difference =Math.Round(arr.Max() - arr.Min(),1);
+    return Difference;
 }
+
 
 int Size = SizeArray();
 
-int[] Array = FillArray(Size);
+double[] Array = FillArray(Size);
 
-System.Console.WriteLine($"В массиве находится {CheckElementArray(Array)} четных чисел");
+System.Console.WriteLine($"Разность между макс.элементом {Array.Max()} и мин.элементом {Array.Min()} равна {MinMaxDifference(Array)}");
+
 
